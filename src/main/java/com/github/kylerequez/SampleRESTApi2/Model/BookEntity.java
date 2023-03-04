@@ -1,7 +1,11 @@
 package com.github.kylerequez.SampleRESTApi2.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Book")
 @Table(name = "books")
@@ -21,9 +25,23 @@ public class BookEntity
     private String id;
 
     @Column(
+            name = "reference",
+            nullable = false,
+            unique = true
+    )
+    private String reference;
+
+    @Column(
             name = "name",
             nullable = false,
             unique = true
     )
     private String name;
+
+
+//    private List<GenreEntity> genres;
+
+    @ManyToMany(mappedBy = "books")
+    @JsonIgnoreProperties("books")
+    private List<AuthorEntity> authors = new ArrayList<>();
 }

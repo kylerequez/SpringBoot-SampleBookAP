@@ -11,4 +11,7 @@ public interface BookRepository extends JpaRepository<BookEntity, String>
 {
     @Query("select b from Book b where b.name = :name")
     BookEntity findByName(@Param(value = "name")String name);
+
+    @Query("select b from Book b where b.id = :id or b.name = :name")
+    BookEntity findByIdOrName(@Param(value = "id")String id , @Param(value = "name")String name);
 }

@@ -48,34 +48,15 @@ public class BookServiceImpl implements BookService
     }
 
     @Override
-    public ResponseEntity<Book> addBook(Book book)
+    public ResponseEntity<Book> addBook(@NonNull Book book)
     {
-        BookEntity foundBook = this.bookRepository.findByName(book.getName());
-        if(foundBook != null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new Book(foundBook));
-        }
-        BookEntity bookEntity = BookEntity
-                .builder()
-                .name(book.getName())
-                .build();
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new Book(this.bookRepository.save(bookEntity)));
+        return null;
     }
 
     @Override
     public ResponseEntity<Book> updateBook(@NonNull String id, @NonNull Book book)
     {
-        BookEntity bookName = this.bookRepository.findByName(book.getName());
-        Optional<BookEntity> bookEntity = this.bookRepository.findById(id);
-        if(bookName == null && !bookEntity.isPresent()) {
-            this.addBook(book);
-        }
-        BookEntity updatedBook = bookEntity.get();
-        updatedBook.setName(book.getName());
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new Book(this.bookRepository.save(updatedBook)));
+        return null;
     }
 
     @Override
