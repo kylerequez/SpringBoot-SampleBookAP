@@ -75,6 +75,9 @@ public class AuthorServiceImpl implements AuthorService{
     @Override
     public ResponseEntity<Author> putUpdateAuthor(@NonNull String id, @NonNull Author author)
     {
+        if(author.getFirstname() == null || author.getMiddlename() == null || author.getLastname() == null){
+            throw new AuthorNullVariableException("Author's name should not be empty");
+        }
         var authorEntity = this.authorRepository.findById(id).orElse(null);
         if(authorEntity == null) {
             authorEntity = new AuthorEntity(author.getFirstname(), author.getMiddlename(), author.getLastname());
@@ -92,6 +95,9 @@ public class AuthorServiceImpl implements AuthorService{
     @Override
     public ResponseEntity<Author> patchUpdateAuthor(@NonNull String id, @NonNull Author author)
     {
+        if(author.getFirstname() == null || author.getMiddlename() == null || author.getLastname() == null){
+            throw new AuthorNullVariableException("Author's name should not be empty");
+        }
         var authorEntity = this.authorRepository.findById(id).orElseThrow(() -> new AuthorNotFoundException("Author with id " + id + " does not exist."));
         authorEntity.setFirstname(author.getFirstname());
         authorEntity.setMiddlename(author.getMiddlename());
