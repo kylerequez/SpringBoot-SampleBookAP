@@ -53,10 +53,6 @@ public class AuthorServiceImpl implements AuthorService{
             throw new AuthorNullVariableException("Author's name should not be empty");
         }
         AuthorEntity authorEntity = new AuthorEntity(author.getFirstname(), author.getMiddlename(), author.getLastname());
-        if(author.getBooks() == null) {
-            authorRepository.save(authorEntity);
-            return ResponseEntity.ok().body(new Author(authorEntity));
-        }
         authorEntity.setBooks(
                 author.getBooks().stream().map(
                     book -> {
@@ -80,14 +76,15 @@ public class AuthorServiceImpl implements AuthorService{
         }
         var authorEntity = this.authorRepository.findById(id).orElse(null);
         if(authorEntity == null) {
-            authorEntity = new AuthorEntity(author.getFirstname(), author.getMiddlename(), author.getLastname());
-        } else {
             authorEntity = AuthorEntity.builder()
-                    .id(id)
                     .firstname(author.getFirstname())
                     .middlename(author.getMiddlename())
                     .lastname(author.getLastname())
                     .build();
+        } else {
+            authorEntity.setFirstname(author.getFirstname());
+            authorEntity.setMiddlename(author.getMiddlename());
+            authorEntity.setLastname(author.getLastname());
         }
         return ResponseEntity.ok().body(new Author(this.authorRepository.save(authorEntity)));
     }
