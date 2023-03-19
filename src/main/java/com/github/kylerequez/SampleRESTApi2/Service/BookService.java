@@ -10,6 +10,9 @@ public interface BookService
     ResponseEntity<List<Book>> getAllBooks();
     ResponseEntity<Book> getBookById(String id);
     ResponseEntity<Book> addBook(Book book);
-    ResponseEntity<Book> updateBook(String id, Book book);
+    ResponseEntity<Book> putUpdateBook(String id, Book book);
+    ResponseEntity<Book> patchUpdateBook(String id, Book book);
     void deleteBook(String id);
+    void deleteAllBooks();
+    ResponseEntity<Book> updateBookAuthors(String id, Book book);
 }

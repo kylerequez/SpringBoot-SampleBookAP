@@ -30,6 +30,7 @@ public class Book
     {
         this.id = bookEntity.getId();
         this.name = bookEntity.getName();
+        this.reference = bookEntity.getReference();
         this.authors = bookEntity.getAuthors()
                 .stream()
                 .map(e -> new Author(e.getId(),

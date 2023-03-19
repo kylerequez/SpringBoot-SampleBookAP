@@ -36,14 +36,26 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book book)
+    public ResponseEntity<Book> putUpdateBook(@PathVariable String id, @RequestBody Book book)
     {
-        return this.bookService.updateBook(id, book);
+        return this.bookService.putUpdateBook(id, book);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable String id)
     {
         this.bookService.deleteBook(id);
+    }
+
+    @DeleteMapping
+    public void deleteAllBooks()
+    {
+        this.bookService.deleteAllBooks();
+    }
+
+    @PatchMapping("/{id}/authors")
+    public ResponseEntity<Book> updateBookAuthors(@PathVariable String id, @RequestBody Book book)
+    {
+        return this.bookService.updateBookAuthors(id, book);
     }
 }
