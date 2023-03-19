@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/authors")
+@CrossOrigin
 public class AuthorController
 {
     public AuthorService authorService;
@@ -52,5 +53,17 @@ public class AuthorController
     public void deleteAuthor(@PathVariable String id)
     {
         this.authorService.deleteAuthor(id);
+    }
+
+    @DeleteMapping
+    public void deleteAllAuthors()
+    {
+        this.authorService.deleteAllAuthors();
+    }
+
+    @PatchMapping("{id}/books")
+    public ResponseEntity<Author> updateAuthorBooks(@PathVariable String id, @RequestBody Author author)
+    {
+        return this.authorService.updateAuthorBooks(id, author);
     }
 }

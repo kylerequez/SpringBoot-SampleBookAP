@@ -13,4 +13,6 @@ public interface AuthorService
     ResponseEntity<Author> putUpdateAuthor(String id, Author author);
     ResponseEntity<Author> patchUpdateAuthor(String id, Author author);
     void deleteAuthor(String id);
+    void deleteAllAuthors();
+    ResponseEntity<Author> updateAuthorBooks(String id, Author author);
 }
